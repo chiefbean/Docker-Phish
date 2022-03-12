@@ -1,0 +1,19 @@
+version: "3.2"
+  services:
+    gophish:
+      build: './gophish'
+      volumes: 
+        - ./gophish/data/:/app/gophish-0.11.0/database/
+      ports:
+        - "3333:3333"
+        - "8080:8080"
+    certbot:
+      build: './acb'
+      volumes:
+        - ./acb/data:/app/webserver/
+        - ./acb/sites-available/:/etc/nginx/sites-available/
+        - ./acb/sites-enabled/:/etc/nginx/sites-enabled/
+      ports:
+        - "3000:3000"
+        - "443:443"
+        - "80:80"
